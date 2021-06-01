@@ -2,11 +2,12 @@ using System;
 
 namespace TreasureApi.Generator
 {
-  public class MagicItems
+
+  public class MagicItemSelector
   {
-    public MagicItemType SelectItemType(PowerLevel level)
+    public MagicItem SelectItemType(PowerLevel level)
     {
-      var rand = new Random().Next(0, 2);
+      var rand = new Random().Next(1, 101);
       MagicItemType itemType = MagicItemType.WEAPONS;
       switch (level)
       {
@@ -109,7 +110,7 @@ namespace TreasureApi.Generator
           break;
       }
 
-      return itemType;
+      return new MagicItem { Power = level, RandomNumber = rand, Type = itemType };
     }
   }
 }

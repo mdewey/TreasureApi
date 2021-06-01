@@ -25,16 +25,16 @@ namespace TreasureApi.Controllers
       var loots = new List<object>();
       for (var i = 0; i < minor; i++)
       {
-        loots.Add(new MagicItems().SelectItemType(PowerLevel.MINOR));
+        loots.Add(new MagicItemSelector().SelectItemType(PowerLevel.MINOR));
       }
       for (var i = 0; i < medium; i++)
       {
-        loots.Add(new MagicItems().SelectItemType(PowerLevel.MEDIUM));
+        loots.Add(new MagicItemSelector().SelectItemType(PowerLevel.MEDIUM));
 
       }
       for (var i = 0; i < major; i++)
       {
-        loots.Add(new MagicItems().SelectItemType(PowerLevel.MAJOR));
+        loots.Add(new MagicItemSelector().SelectItemType(PowerLevel.MAJOR));
 
       }
 
