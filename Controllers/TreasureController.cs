@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using TreasureApi.Generator;
 
 namespace TreasureApi.Controllers
 {
@@ -16,7 +17,29 @@ namespace TreasureApi.Controllers
     [HttpGet]
     public async Task<ActionResult> GetTreasure([FromQuery] int? minor, [FromQuery] int? medium, [FromQuery] int? major)
     {
-      return Ok(new { parameters = new { minor, medium, major } });
+
+      // generate minor + major + med number of random numbers
+      var total = minor.GetValueOrDefault() + medium.GetValueOrDefault() + major.GetValueOrDefault();
+      var numbers =
+            new List<int>();
+      var loots = new List<object>();
+      for (var i = 0; i < minor; i++)
+      {
+        loots.Add(new MagicItems().SelectItemType(PowerLevel.MINOR));
+      }
+      for (var i = 0; i < medium; i++)
+      {
+        loots.Add(new MagicItems().SelectItemType(PowerLevel.MEDIUM));
+
+      }
+      for (var i = 0; i < major; i++)
+      {
+        loots.Add(new MagicItems().SelectItemType(PowerLevel.MAJOR));
+
+      }
+
+
+      return Ok(new { parameters = new { minor, medium, major }, data = new { loots, numbers, total } });
     }
   }
 }
