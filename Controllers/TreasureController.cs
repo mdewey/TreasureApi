@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using TreasureApi.Generator;
+using TreasureApi.Selectors;
 
 namespace TreasureApi.Controllers
 {
@@ -22,7 +23,7 @@ namespace TreasureApi.Controllers
       var total = minor.GetValueOrDefault() + medium.GetValueOrDefault() + major.GetValueOrDefault();
       var numbers =
             new List<int>();
-      var loots = new List<object>();
+      var loots = new List<MagicItem>();
       for (var i = 0; i < minor; i++)
       {
         loots.Add(new MagicItemSelector().SelectItemType(PowerLevel.MINOR));
@@ -35,8 +36,9 @@ namespace TreasureApi.Controllers
       for (var i = 0; i < major; i++)
       {
         loots.Add(new MagicItemSelector().SelectItemType(PowerLevel.MAJOR));
-
       }
+
+      await new PotionSelector().GetMagicItemAsync(null);
 
 
       return Ok(new { parameters = new { minor, medium, major }, data = new { loots, numbers, total } });

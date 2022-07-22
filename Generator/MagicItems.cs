@@ -110,7 +110,7 @@ namespace TreasureApi.Generator
           break;
       }
 
-      return new MagicItem { Power = level, RandomNumber = rand, Type = itemType };
+      return new MagicItem { Power = level, Type = itemType };
     }
   }
 }
